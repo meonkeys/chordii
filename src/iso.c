@@ -17,6 +17,10 @@
 
 #include <stdio.h>
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 void print_re_encode ()
 {
 	printf("%%  iso.ps  reencodeing of ISO 8859-1 8-bit french characters\n");
@@ -44,7 +48,8 @@ void print_re_encode ()
 	printf("      end\n");
 	printf("   } def\n");
 	printf("\n");
-#ifndef LATIN2
+#ifndef _WITH_LATIN2
+	/* ISO 8859.1 (Latin-1) encoding. Default. */
 	printf("/ISO 256 array def\n");
 	printf("\n");
 	printf("0 1 255 { ISO exch /.notdef put } for\n");
@@ -241,6 +246,7 @@ void print_re_encode ()
 	printf("  dup 8#376 /.notdef put\n");
 	printf("  pop\n");
 #else
+	/* ISO 8859.2 (Latin-2) encoding. */
 	printf("/ISO [\n");
 	printf("/.notdef      	/.notdef      	/.notdef      	/.notdef      	\n");
 	printf("/.notdef      	/.notdef      	/.notdef      	/.notdef      	\n");
