@@ -101,11 +101,13 @@ void read_input_file(source, source_fd)
 char source[];
 FILE *source_fd;
         {
-	sprintf (mesg , "start of read_input_file on [%s]", source);
-	debug (mesg);
+        int dash = !strcmp(source,"-"); /* reading from standard input */
+        if ( dash ) source = "<stdin>";
+        sprintf (mesg , "start of read_input_file on [%s]", source);
+        debug (mesg);
         current_file = source; 
 
-        source_fd = fopen (source, "r");
+        source_fd = dash ? stdin : fopen (source, "r");
 
         if (source_fd == NULL)
                 {
@@ -114,6 +116,6 @@ FILE *source_fd;
                 }
 
         process_file(source_fd);
-        fclose(source_fd);
+        if ( !dash ) fclose(source_fd);
         }
 
