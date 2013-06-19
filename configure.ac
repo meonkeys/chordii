@@ -13,12 +13,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Chordii.  If not, see <http://www.gnu.org/licenses/>.
 
-AC_INIT([Chordii], [4.5.0], [jvromans@users.sourceforge.net])
+AC_INIT([Chordii], [4.5.1], [jvromans@users.sourceforge.net])
 
 AM_INIT_AUTOMAKE
-
-PATCH_LEVEL=0
-AC_DEFINE_UNQUOTED([PATCH_LEVEL],["$PATCH_LEVEL"],[Define to the minor version (aka patch level) of this package.])
 
 AC_CONFIG_HEADER([src/config.h])
 
@@ -46,8 +43,6 @@ if test "$CC" = "gcc"; then
   CFLAGS="$CFLAGS -Wall -pedantic -g"
 fi
 AC_SUBST(CFLAGS)
-
-AC_SUBST([PATCH_LEVEL],$PATCH_LEVEL)
 
 # --enable-latin2 configure option.
 AC_MSG_CHECKING([whether to use ISO-8895.2 (Latin-2) for input data])

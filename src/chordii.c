@@ -340,7 +340,7 @@ char *command;
 	fprintf (stderr, "  --text-font=FONT  -T          Sets text font\n");
 	fprintf (stderr, "  --toc  -i                     Generates a table of contents\n");
 	fprintf (stderr, "  --transpose=N  -x             Transposes by N semi-tones\n");
-	fprintf (stderr, "  --version  -V                 Prints version and patchlevel\n");
+	fprintf (stderr, "  --version  -V                 Prints Chordii version and exits\n");
 	fprintf (stderr, "  --vertical-space=N  -w        Extra vertical space between lines\n");
 	fprintf (stderr, "  --2-up  -2                    2 pages per sheet\n");
 	fprintf (stderr, "  --4-up  -4                    4 pages per sheet\n");
@@ -508,8 +508,8 @@ void init_ps()
 	{
 	printf ("%%!PS-Adobe-1.0\n");
 	printf ("%%%%Title: A nicely formatted song sheet\n");
-	printf ("%%%%Creator: %s %s.%s\n",
-		PACKAGE_NAME, PACKAGE_VERSION, PATCH_LEVEL);
+	printf ("%%%%Creator: %s %s\n",
+		PACKAGE_NAME, PACKAGE_VERSION);
 	printf ("%%%%DocumentFonts: (atend)\n");
 	printf ("%%%%Pages: (atend)\n");
 	printf ("%%%%BoundingBox: 5 5 %d %d\n", (int)(width-5), (int)(height-5));

@@ -90,9 +90,8 @@ void print_version()
 {
 
         char *version = VERSION;
-        char *patch_level = PATCH_LEVEL;
         
-        printf ("%s version %s, patchlevel %s\n", command_name, version, patch_level);
+        printf ("%s version %s\n", command_name, version);
 }
 
 /* --------------------------------------------------------------------------------*/
