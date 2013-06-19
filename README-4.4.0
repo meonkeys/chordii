@@ -1,0 +1,22 @@
+Changes in Chordii 4.4.0
+
+* Finish long options for chordii.
+
+* Eliminate fallback to our own (ancient. obsolete) copy of getopt.
+
+* Normalize line endings for INSTALL.WINDOWS.
+
+* Update TODO items.
+
+* Add -w N option to add extra vertical space to improve readability.
+
+* Add compile-time support for ISO 8859.2.
+
+* Reset settings before producing the toc.
+
+* (do_directive) Allow number of colums to be set to 1.
+
+* Manpage cleanup, mostly for consistency.
+
+* Remove debian specific files.
+

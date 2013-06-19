@@ -6,6 +6,8 @@ Makefile.am
 Makefile.in
 NEWS
 README
+README-4.4.0
+README-4.5.0
 aclocal.m4
 configure
 configure.ac

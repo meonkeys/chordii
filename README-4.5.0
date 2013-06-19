@@ -1,0 +1,15 @@
+Changes in Chordii 4.5.0
+
+* Allow reading from - (stdin).
+
+* Configure option --enable-latin2 for latin2 support.
+
+* Add support for A5 papersize
+
+* Issue 3483086 - Print chord grids in order they appear in the song.
+  Option --chord-grids-sorted (short: -S) can be used to print the
+  chords in alphabetical order. 
+
+* Issue 3571592 - Chordpro files with Mac OS line endings silently fail
+
+* Minor fixes for spelling errors and documentation.
