@@ -1,7 +1,7 @@
 [X] replace current examples
 	use songs available under an open license
 [_] add unit tests
-[_] use system getopt library
+[X] use system getopt library
 [_] clean up code
 	[_] reindent
 		suggestion: "indent -bli0 -nut -i4"
