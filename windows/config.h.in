@@ -63,9 +63,6 @@
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "@PACKAGE_VERSION@"
 
-/* Define to the minor version (aka patch level) of this package. */
-#define PATCH_LEVEL "@PATCH_LEVEL@"
-
 /* If using the C implementation of alloca, define if you know the
    direction of stack growth for your system; otherwise it will be
    automatically deduced at runtime.
