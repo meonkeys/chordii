@@ -1,3 +1,26 @@
+NEW IN VERSION 4.5.1
+
+* Minor fixes to the source kits.
+
+* Replace getopt.c for Windows by the NetBSD version to support long
+  options.
+
+NEW IN VERSION 4.5
+
+* Allow reading from - (stdin).
+
+* Configure option --enable-latin2 for latin2 support.
+
+* Add support for A5 papersize
+
+* Issue 3483086 - Print chord grids in order they appear in the song.
+  Option --chord-grids-sorted (short: -S) can be used to print the
+  chords in alphabetical order. 
+
+* Issue 3571592 - Chordpro files with Mac OS line endings silently fail
+
+* Minor fixes for spelling errors and documentation.
+
 NEW IN VERSION 4.3
 
 * Rebased on Chord 3.6.4.
