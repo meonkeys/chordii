@@ -638,8 +638,8 @@ void init_known_chords()
 	learn_chord("Adim",	 N, N, 1, 2, 1, 2,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("Amaj",	 N, 0, 2, 2, 2, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("Amaj7",	 N, 0, 2, 1, 2, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
-	learn_chord("Am",	 N, 0, 2, 2, 1, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
-	learn_chord("Amin",	 N, 0, 2, 2, 1, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
+	learn_chord("Am",	 N, 0, 2, 2, 1, 0,	 1, CHORD_BUILTIN, CHORD_EASY);
+	learn_chord("Amin",	 N, 0, 2, 2, 1, 0,	 1, CHORD_BUILTIN, CHORD_EASY);
 	learn_chord("A/D",	 N, N, 0, 0, 2, 2,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("A/F#",	 2, 0, 2, 2, 2, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("A/G#",	 4, 0, 2, 2, 2, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
@@ -679,8 +679,8 @@ void init_known_chords()
 	learn_chord("Bbmaj",	 N, 1, 3, 3, 3, 1,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("Bbmaj7",	 N, 1, 3, 2, 3, N,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("Bbdim",	 N, N, 2, 3, 2, 3,	 1, CHORD_BUILTIN, CHORD_HARD);
-	learn_chord("Bbm",	 N, 1, 3, 3, 2, 1,	 1, CHORD_BUILTIN, CHORD_HARD);
-	learn_chord("Bbmin",	 N, 1, 3, 3, 2, 1,	 1, CHORD_BUILTIN, CHORD_HARD);
+	learn_chord("Bbm",	 N, 1, 3, 3, 2, 1,	 1, CHORD_BUILTIN, CHORD_EASY);
+	learn_chord("Bbmin",	 N, 1, 3, 3, 2, 1,	 1, CHORD_BUILTIN, CHORD_EASY);
 	learn_chord("Bbm7",	 N, 1, 3, 1, 2, 1,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("Bbm9",	 N, N, N, 1, 1, 3,	 6, CHORD_BUILTIN, CHORD_HARD);
 
@@ -701,8 +701,8 @@ void init_known_chords()
 	learn_chord("Bmaj",	 N, 2, 4, 3, 4, N,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("Bmaj7",	 N, 2, 4, 3, 4, N,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("Bdim",	 N, N, 0, 1, 0, 1,	 1, CHORD_BUILTIN, CHORD_HARD);
-	learn_chord("Bm",	 N, 2, 4, 4, 3, 2,	 1, CHORD_BUILTIN, CHORD_HARD);
-	learn_chord("Bmin",	 N, 2, 4, 4, 3, 2,	 1, CHORD_BUILTIN, CHORD_HARD);
+	learn_chord("Bm",	 N, 2, 4, 4, 3, 2,	 1, CHORD_BUILTIN, CHORD_EASY);
+	learn_chord("Bmin",	 N, 2, 4, 4, 3, 2,	 1, CHORD_BUILTIN, CHORD_EASY);
 	learn_chord("B/F#",	 0, 2, 2, 2, 0, 0,	 2, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("BaddE",	 N, 2, 4, 4, 0, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("B(addE)",	 N, 2, 4, 4, 0, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
@@ -730,8 +730,8 @@ void init_known_chords()
 	learn_chord("Csus9",	 N, N, 4, 1, 2, 4,	 7, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("Cmaj",	 0, 3, 2, 0, 1, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("Cmaj7",	 N, 3, 2, 0, 0, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
-	learn_chord("Cm",	 N, 1, 3, 3, 2, 1,	 3, CHORD_BUILTIN, CHORD_HARD);
-	learn_chord("Cmin",	 N, 1, 3, 3, 2, 1,	 3, CHORD_BUILTIN, CHORD_HARD);
+	learn_chord("Cm",	 N, 1, 3, 3, 2, 1,	 3, CHORD_BUILTIN, CHORD_EASY);
+	learn_chord("Cmin",	 N, 1, 3, 3, 2, 1,	 3, CHORD_BUILTIN, CHORD_EASY);
 	learn_chord("Cdim",	 N, N, 1, 2, 1, 2,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("C/B",	 N, 2, 2, 0, 1, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("Cadd2/B",	 N, 2, 0, 0, 1, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
@@ -861,7 +861,7 @@ void init_known_chords()
 	learn_chord("Emaj",	 0, 2, 2, 1, 0, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("Emaj7",	 0, 2, 1, 1, 0, N,	 1, CHORD_BUILTIN, CHORD_HARD);
 	learn_chord("Edim",	 N, N, 2, 3, 2, 3,	 1, CHORD_BUILTIN, CHORD_HARD);
-	learn_chord("Em",	 0, 2, 2, 0, 0, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
+	learn_chord("Em",	 0, 2, 2, 0, 0, 0,	 1, CHORD_BUILTIN, CHORD_EASY);
 	learn_chord("Emin",	 0, 2, 2, 0, 0, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
 
 	learn_chord("Em6",	 0, 2, 2, 0, 2, 0,	 1, CHORD_BUILTIN, CHORD_HARD);
