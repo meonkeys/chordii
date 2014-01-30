@@ -1216,10 +1216,7 @@ FILE *source_fd;
 		default :
 			if (in_chord )
 				{
-				if ( c != ' ' )
-					{
-					put_in_string(chord, &i_chord, c, CHORD_NAME_SZ, &i_chord_ov);
-					}
+				put_in_string(chord, &i_chord, c, CHORD_NAME_SZ, &i_chord_ov);
 				}
 			else if (in_directive)
 				{
