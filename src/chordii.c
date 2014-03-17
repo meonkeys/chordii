@@ -1358,11 +1358,13 @@ char **argv;
 			break;
 
 		case 'x':
-			i = atoi (optarg);
-			if ( i == 0 )
+			{ char *p;
+			  i = strtol (optarg, &p, 10);
+			  if ( *p != '\0' || abs(i) > 12 )
 				error_rt("invalid value for transposition");
-			else
+			  else
 				transpose = i;
+			}
 			break;
 
 		case 's':

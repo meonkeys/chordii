@@ -41,6 +41,8 @@ int sharp, flat, new_i;
 char new_chord[MAXTOKEN];
 static char *notes[] = { "C", "D", "E", "F", "G", "A", "B" };
 
+if ( ! transpose ) return(0);
+
 p_chord = 0;
 p_new_chord = 0;
 
