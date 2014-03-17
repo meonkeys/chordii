@@ -39,8 +39,7 @@
 #define MAXLINE 256
 #define MAXFONTS 16   /* Maximum number of different fonts in one execution */
 #define MAXTOKEN 256
-#define MAX_CHORD 1024
-#define CHORD_NAME_SZ   20
+#define CHORD_NAME_SZ   26
 #define MAXNOTE 8
 
 #define LONG_FINGERS	4
