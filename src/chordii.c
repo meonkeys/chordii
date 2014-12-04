@@ -1161,8 +1161,14 @@ FILE *source_fd;
 				while (1) 
 					{
 					c = getc(source_fd);
-					if (c == '\n' || c == '\r' || c == EOF)
+					if (c == '\n' || c == EOF)
 						break;
+					if ( c == '\r' ) {
+					  if ( (c = getc(source_fd)) == EOF || c == '\n' )
+					    break;
+					  ungetc( c, source_fd );
+					  break;
+					}
 					}
 				i_input = 0;
 				do_directive(&directive[0]);
@@ -1175,8 +1181,16 @@ FILE *source_fd;
 				error("'}' found with no matching '{'");
 			break;
 
-		case '\n':
 		case '\r':
+		  if ( (c = getc(source_fd)) == EOF )
+		    goto got_eof;
+		  if ( c != '\n' ) {
+		    do_eol();
+		    ungetc( c, source_fd );
+		    break;
+		  }
+		  /* fall through */
+		case '\n':
 			do_eol();
 			break;
 		case '(':
@@ -1229,6 +1243,7 @@ FILE *source_fd;
 			break;
 			}
 		}
+got_eof:
 	if (i_input != 0 ) do_eol();
 	if (! in_chordrc) print_text_line();
 	}
