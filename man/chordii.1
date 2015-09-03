@@ -37,6 +37,10 @@ integer value.
 Sets the font used to print chords to the specified name. That name must be
 known to your PostScript Interpreter.
 .TP 8
+.B \-\-chord-colour=\fICHORD_COLOUR\fP \-C
+Sets the colour used to print chords. Allowed
+values are 'black', 'white', 'red', 'green', 'blue', 'yellow', 'magenta' and 'cyan'.
+.TP 8
 .B \-\-dump-chords-text  \-d
 Generates a text chord chart of all internally known chords as well as chords
 defined in the .chordrc file. Chords defined in the .chordrc file are
@@ -130,7 +134,7 @@ Prints two logical pages per physical page.
 Prints four logical pages per physical page.
 
 .SH KEYWORDS
-A line starting with a '#' is interpreted as a comment, and generates no
+A line starting with a '#' is interpreted as a comment and generates no
 output. (although all your comments are automatically mailed to the authors,
 and we read them at parties...)
 

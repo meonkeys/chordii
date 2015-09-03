@@ -30,6 +30,7 @@ char
 	*mesg,
 	*text_font, *rt_text_font, *rc_text_font,	/* font for text */
 	*chord_font, *rt_chord_font, *rc_chord_font,	/* font for chord */
+	*chord_col, *rt_chord_col, *rc_chord_col,	/* colour for chord */
 	*mono_font = MONOSPACED_FONT,	/* non-proprotional font for tabs */
 	*current_file,
 	*chord_line[MAXLINE],
@@ -324,6 +325,7 @@ char *command;
 	fprintf (stderr, "  --chord-grid-size=N  -s       Sets chord grid size [30]\n");
 	fprintf (stderr, "  --chord-grids-sorted  -S      Prints chord grids alphabetically\n");
 	fprintf (stderr, "  --chord-size=N  -c            Sets chord size [9]\n");
+	fprintf (stderr, "  --chord-colour=COL            Sets chord colour [black]\n");
 	fprintf (stderr, "  --dump-chords  -D             Dumps chords definitions (PostScript)\n");
 	fprintf (stderr, "  --dump-chords-text  -d        Dumps chords definitions (Text)\n");
 	fprintf (stderr, "  --even-pages-number-left  -L  Even pages numbers on left\n");
@@ -494,9 +496,14 @@ void print_chord_line ()
 
 
 			use_chord_font();
+			if ( chord_col && *chord_col )
+			{
+				printf("gsave %s setrgbcolor\n", chord_col);
+			}
 			printf ("(");
 			ps_puts(chord_line[j]);
-			printf (") show\n");
+			printf (") show%s\n",
+				chord_col && *chord_col ? " grestore" : "");
 		
 			chord_line[j]= NULL;
 			}
@@ -705,6 +712,7 @@ void set_rc_def()
 	if (rc_no_grid != 0) no_grid =  rc_no_grid;
 	if (rc_text_font != NULL) text_font =  rc_text_font;
 	if (rc_chord_font != NULL) chord_font =  rc_chord_font;
+	if (rc_chord_col != NULL) chord_col =  rc_chord_col;
 	if (rc_pagespec != NULL) pagespec = rc_pagespec;
 	if (rc_extra_space != 0) extra_space = rc_extra_space;
 	}
@@ -718,6 +726,7 @@ void set_rt_def()
 	if (rt_no_grid != 0) no_grid =  rt_no_grid;
 	if (rt_text_font != NULL) text_font =  rt_text_font;
 	if (rt_chord_font != NULL) chord_font =  rt_chord_font;
+	if (rt_chord_col != NULL) chord_col =  rt_chord_col;
 	if (rt_pagespec != NULL) pagespec = rt_pagespec;
 	if (rt_extra_space != 0) extra_space = rt_extra_space;
 	}
@@ -891,6 +900,21 @@ char	*sub_title;
 
 
 /* --------------------------------------------------------------------------------*/
+static char * parse_colour(arg)
+char *arg;
+{
+	if ( !strcmp(arg, "red"    ) ) return "1 0 0";
+	if ( !strcmp(arg, "green"  ) ) return "0 1 0";
+	if ( !strcmp(arg, "blue"   ) ) return "0 0 1";
+	if ( !strcmp(arg, "yellow" ) ) return "1 1 0";
+	if ( !strcmp(arg, "magenta") ) return "1 0 1";
+	if ( !strcmp(arg, "cyan"   ) ) return "0 1 1";
+	if ( !strcmp(arg, "white"  ) ) return "1 1 1";
+	if ( !strcmp(arg, "black"  ) ) return "0 0 0";
+	return NULL;
+}
+
+/* --------------------------------------------------------------------------------*/
 void do_directive(directive)
 char *directive;
 	{
@@ -928,6 +952,25 @@ char *directive;
 			{
 			chord_font = strtok(NULL, ": ");
 			set_chord_font();
+			}
+		}
+	else if (!strcmp (command, "chordcolor") || !strcmp (command, "chordcolour"))
+		{
+		if (in_chordrc)
+		{
+			rc_chord_col = parse_colour(strtok(NULL, ": "));
+			if ( !rc_chord_col )
+			{
+				error("Invalid value for chord colour");
+			}
+		}
+		else
+			{
+			chord_col = parse_colour(strtok(NULL, ": "));
+			if ( !chord_col )
+			{
+				error("Invalid value for chord colour");
+			}
 			}
 		}
 	else if (!strcmp (command, "chordsize") || !strcmp (command, "cs"))
@@ -1291,6 +1334,10 @@ void read_chordrc()
 /* --------------------------------------------------------------------------------*/
 
 static struct option long_options[] = {
+  /* These are long only, put at the beginning */
+  { "chord-color",	      required_argument, 0, 0   },
+  { "chord-colour",	      required_argument, 0, 0   },
+  /* These have single-character equivalents */
   { "2-up",		      no_argument,       0, '2' },
   { "4-up",		      no_argument,       0, '4' },
   { "about",		      no_argument,       0, 'A' },
@@ -1468,6 +1515,17 @@ char **argv;
 
 		case 'w':
 			rt_extra_space = atoi(optarg);
+			break;
+
+		case 0:		/* long only option */
+			if ( option_index == 0 || option_index == 1 )
+			{
+				rt_chord_col = parse_colour(optarg);
+				if ( !rt_chord_col )
+				{
+					error_rt("Invalid value for chord colour");
+				}
+			}
 			break;
 
 		case '?':
