@@ -903,6 +903,7 @@ char	*sub_title;
 static char * parse_colour(arg)
 char *arg;
 {
+	unsigned r, g, b;
 	if ( !strcmp(arg, "red"    ) ) return "1 0 0";
 	if ( !strcmp(arg, "green"  ) ) return "0 1 0";
 	if ( !strcmp(arg, "blue"   ) ) return "0 0 1";
@@ -911,6 +912,12 @@ char *arg;
 	if ( !strcmp(arg, "cyan"   ) ) return "0 1 1";
 	if ( !strcmp(arg, "white"  ) ) return "1 1 1";
 	if ( !strcmp(arg, "black"  ) ) return "0 0 0";
+	if ( strlen(arg) == 7 && sscanf(arg, "#%2x%2x%2x", &r, &g, &b) == 3 )
+		{
+		char buf[] = "            ";
+		sprintf(buf, "%u %u %u", r, g, b);
+		return strdup(buf);
+		}
 	return NULL;
 }
 
