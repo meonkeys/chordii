@@ -112,6 +112,8 @@ char *command;
         {
         fprintf (stderr, "Usage: %s [options] file\n", command);
         fprintf (stderr, "Options:\n");
+        fprintf (stderr, "      -o outfile         : Output file\n");
+        fprintf (stderr, "      -V                 : Prints version\n");
         fprintf (stderr, "      -D                 : Debug mode\n");
 	exit(0);
         }
@@ -122,8 +124,12 @@ void do_sig()
 	char sig_file[MAXTOKEN];
 	FILE *sig_fd;
 
-	strcpy (sig_file, getenv ("HOME"));
-	strcat (sig_file,"/.a2crdsig\0");
+	char *home = getenv ("HOME");
+	if ( !home )
+		return;
+
+	strcpy (sig_file, home);
+	strcat (sig_file, "/.a2crdsig\0");
 
 	sig_fd = fopen (sig_file, "r");
 	if (sig_fd != NULL)
@@ -157,7 +163,7 @@ while ((c=getc(source_fd)) != EOF)
 			{
 			int c2;
 			c2 = getc(source_fd);
-			if (c2 != '\n')
+			if (c2 != '\n' && c2 != EOF)
 				ungetc(c2, source_fd);
 			}
 			/* fall through */
@@ -332,7 +338,7 @@ double f;
 command_name=argv[0];
 mesg=&mesgbuf[0];
 
-while (( c = getopt(argc, argv, "Dr:o:")) != -1)
+while (( c = getopt(argc, argv, "VDr:o:")) != -1)
 	switch (c) {
 
 	case 'D':
@@ -355,6 +361,11 @@ while (( c = getopt(argc, argv, "Dr:o:")) != -1)
 			}
 		break;
 
+
+	case 'V':
+		print_version();
+		exit(0);
+		break;
 
 	case '?':
 		do_help (argv[0]);
