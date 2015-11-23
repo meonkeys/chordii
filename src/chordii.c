@@ -1321,7 +1321,10 @@ static struct option long_options[] = {
   { "toc",		      no_argument,       0, 'i' },
   { "transpose",	      required_argument, 0, 'x' },
   { "version",		      no_argument,       0, 'V' },
-  { "vertical-space",	      required_argument, 0, 'w' }
+  { "vertical-space",	      required_argument, 0, 'w' },
+  /* Do not forget to terminate the list, to prevent crashes */
+  /*  on unknown options. */
+  { NULL,                     0,                 0, 0   },
 };
 
 int main(argc, argv)
