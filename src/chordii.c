@@ -508,8 +508,13 @@ void init_ps()
 	{
 	printf ("%%!PS-Adobe-1.0\n");
 	printf ("%%%%Title: A nicely formatted song sheet\n");
-	printf ("%%%%Creator: %s %s\n",
+#ifdef WITH_LATIN2
+	printf ("%%%%Creator: %s %s latin2\n",
 		PACKAGE_NAME, PACKAGE_VERSION);
+#else
+ 	printf ("%%%%Creator: %s %s\n",
+ 		PACKAGE_NAME, PACKAGE_VERSION);
+#endif
 	printf ("%%%%DocumentFonts: (atend)\n");
 	printf ("%%%%Pages: (atend)\n");
 	printf ("%%%%BoundingBox: 5 5 %d %d\n", (int)(width-5), (int)(height-5));

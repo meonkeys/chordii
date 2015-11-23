@@ -48,7 +48,7 @@ void print_re_encode ()
 	printf("      end\n");
 	printf("   } def\n");
 	printf("\n");
-#ifndef _WITH_LATIN2
+#ifndef WITH_LATIN2
 	/* ISO 8859.1 (Latin-1) encoding. Default. */
 	printf("/ISO 256 array def\n");
 	printf("\n");
