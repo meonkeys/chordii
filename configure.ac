@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Chordii.  If not, see <http://www.gnu.org/licenses/>.
 
-AC_INIT([Chordii], [4.5.90], [jvromans@users.sourceforge.net])
+AC_INIT([Chordii], [4.5.3], [jvromans@users.sourceforge.net])
 
 AM_INIT_AUTOMAKE
 
@@ -49,7 +49,7 @@ AC_MSG_CHECKING([whether to use ISO-8895.2 (Latin-2) for input data])
 AC_ARG_ENABLE(latin2,
   AC_HELP_STRING([--enable-latin2], [use ISO-8859.2 (Latin-2) for input data]),
   [if test "${enable_latin2}" = "yes" ; then
-    AC_DEFINE(_WITH_LATIN2, 1, Use ISO-8859.2 (Latin-2) encoding for input data)
+    AC_DEFINE(WITH_LATIN2, 1, Use ISO-8859.2 (Latin-2) encoding for input data)
     AC_MSG_RESULT([yes])
    else
     AC_MSG_RESULT([no])

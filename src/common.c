@@ -91,7 +91,11 @@ void print_version()
 
         char *version = VERSION;
         
+#ifdef WITH_LATIN2
+        printf ("%s version %s latin2\n", command_name, version);
+#else
         printf ("%s version %s\n", command_name, version);
+#endif
 }
 
 /* --------------------------------------------------------------------------------*/

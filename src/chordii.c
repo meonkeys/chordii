@@ -515,8 +515,13 @@ void init_ps()
 	{
 	printf ("%%!PS-Adobe-1.0\n");
 	printf ("%%%%Title: A nicely formatted song sheet\n");
-	printf ("%%%%Creator: %s %s\n",
+#ifdef WITH_LATIN2
+	printf ("%%%%Creator: %s %s latin2\n",
 		PACKAGE_NAME, PACKAGE_VERSION);
+#else
+ 	printf ("%%%%Creator: %s %s\n",
+ 		PACKAGE_NAME, PACKAGE_VERSION);
+#endif
 	printf ("%%%%DocumentFonts: (atend)\n");
 	printf ("%%%%Pages: (atend)\n");
 	printf ("%%%%BoundingBox: 5 5 %d %d\n", (int)(width-5), (int)(height-5));
@@ -1370,7 +1375,10 @@ static struct option long_options[] = {
   { "toc",		      no_argument,       0, 'i' },
   { "transpose",	      required_argument, 0, 'x' },
   { "version",		      no_argument,       0, 'V' },
-  { "vertical-space",	      required_argument, 0, 'w' }
+  { "vertical-space",	      required_argument, 0, 'w' },
+  /* Do not forget to terminate the list, to prevent crashes */
+  /*  on unknown options. */
+  { NULL,                     0,                 0, 0   },
 };
 
 int main(argc, argv)
