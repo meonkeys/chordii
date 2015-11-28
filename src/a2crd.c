@@ -299,6 +299,8 @@ sprintf (mesg, "text is \"%s\"",buf); debug(mesg);
 				print_2lines(chord_line, text_line);
 				lbuf=0;
 				}
+			not_space++;
+			buf[lbuf++] = c;
 			break;
 
 		case '\t':
