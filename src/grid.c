@@ -32,6 +32,7 @@ extern int in_chordrc;
 extern int sort_type;
 extern float top, bottom, margin, width;
 extern char *text_font, *chord_font, *mono_font;
+extern int nashville_mode;
 
 /*--------------------------------------------------------------------------------*/
 void do_init_grid_ps()
@@ -253,8 +254,10 @@ char *chord;
 		{
 		if ((kc_ptr=get_kc_entry (chord)) == NULL)
 			{
-			sprintf (mesg, "chord \'%s\' has never been defined", chord);
-			error(mesg);
+			if(!nashville_mode) {
+				sprintf (mesg, "chord \'%s\' has never been defined", chord);
+				error(mesg);
+			}
 			learn_chord(chord, -2, -2, -2, -2, -2, -2, 0, CHORD_BUILTIN, CHORD_EASY);
 			kc_ptr=get_kc_entry (chord);
 			}
@@ -296,8 +299,10 @@ char *chord;
 		{
 		if ((kc_ptr=get_kc_entry (chord)) == NULL)
 			{
-			sprintf (mesg, "chord \'%s\' has never been defined", chord);
-			error(mesg);
+			if(!nashville_mode) {
+				sprintf (mesg, "chord \'%s\' has never been defined", chord);
+				error(mesg);
+			}
 			learn_chord(chord, -2, -2, -2, -2, -2, -2, 0, CHORD_BUILTIN, CHORD_EASY);
 			kc_ptr=get_kc_entry (chord);
 			}

@@ -94,6 +94,9 @@ int		/* BOOLEANS */
 	debug_mode = FALSE,
 	in_order = TRUE;
 
+int
+	nashville_mode = FALSE;
+
 float
 	chord_inc,
 	scale = 1.0,		/* Current scale factor */
@@ -346,7 +349,7 @@ char *command;
 	fprintf (stderr, "  --vertical-space=N  -w        Extra vertical space between lines\n");
 	fprintf (stderr, "  --2-up  -2                    2 pages per sheet\n");
 	fprintf (stderr, "  --4-up  -4                    4 pages per sheet\n");
-
+	fprintf (stderr, "  --nashville -N                Output Nashville Notation (no translation)\n");
 	exit(0);
 	}
 
@@ -1376,6 +1379,7 @@ static struct option long_options[] = {
   { "transpose",	      required_argument, 0, 'x' },
   { "version",		      no_argument,       0, 'V' },
   { "vertical-space",	      required_argument, 0, 'w' },
+  { "nashville",              no_argument,       0, 'N' },
   /* Do not forget to terminate the list, to prevent crashes */
   /*  on unknown options. */
   { NULL,                     0,                 0, 0   },
@@ -1393,7 +1397,7 @@ char **argv;
 
 	command_name= argv[0];
 	while ((c = getopt_long(argc, argv,
-				"aAc:C:dDgGhilLno:p:P:s:St:T:Vw:x:24",
+				"aAc:C:dDgGhilLno:p:P:s:St:T:Vw:x:24N",
 				long_options, &option_index)) != -1)
 		switch (c) {
 
@@ -1442,6 +1446,15 @@ char **argv;
 			  else
 				transpose = i;
 			}
+			break;
+		case 'N':
+			/* 
+				nashville mode doesn't transpose
+				or print chord grids
+			*/
+			transpose=0;
+			nashville_mode=TRUE;
+			rt_no_grid = TRUE;
 			break;
 
 		case 's':
