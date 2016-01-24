@@ -965,7 +965,7 @@ char *directive;
 		if (in_chordrc) rc_chord_font = strdup(strtok(NULL, ": "));
 		else
 			{
-			chord_font = strtok(NULL, ": ");
+			chord_font = strdup(strtok(NULL, ": "));
 			set_chord_font();
 			}
 		}
