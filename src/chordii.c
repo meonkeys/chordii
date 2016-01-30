@@ -415,10 +415,11 @@ int	style;
 	}
 	else if (style == 3) {
 		printf ("newpath\n");
-		printf ("%d %d moveto\n",hpos + 2, vpos - 2);
+		printf ("%d %d moveto\n", hpos - 2, vpos - 2);
 		printf ("(");
 		ps_puts(comment);
-		printf (") stringwidth /vdelta exch def /hdelta exch def\n");
+		printf (") stringwidth /vdelta exch def /hdelta exch %.0f add def\n",
+				text_size/3.0);
 		printf ("hdelta vdelta rlineto 0 %d rlineto hdelta neg 0 rlineto closepath\n",
 				text_size);
 		printf ("stroke\n");
