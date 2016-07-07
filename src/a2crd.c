@@ -375,27 +375,27 @@ while (( c = getopt(argc, argv, "VDr:o:")) != -1)
 	}
 
 
-        if (optind  == argc)
-                {
-                debug ("Reading stdin");
-                strcpy(source, "stdin");
-                process_file (stdin);
-                }
-        else
-                {
-                for ( ; optind < argc; optind++ )
-                        {
-			sprintf (mesg, "Ready to process file \"%s\"\n", argv[optind]);
-                        debug (mesg);
+if (optind  == argc)
+	{
+	debug ("Reading stdin");
+	strcpy(source, "stdin");
+	process_file (stdin);
+	}
+else
+	{
+	for ( ; optind < argc; optind++ )
+		{
+		sprintf (mesg, "Ready to process file \"%s\"\n", argv[optind]);
+		debug (mesg);
 
-                        strcpy(source, argv[optind]);
+		strcpy(source, argv[optind]);
 
-			sprintf (mesg, "Calling read_input_file on \"%s\"\n", source);
-                        debug (mesg);
+		sprintf (mesg, "Calling read_input_file on \"%s\"\n", source);
+		debug (mesg);
 
-                        read_input_file(source, source_fd);
-                        }
-                }
+		read_input_file(source, source_fd);
+		}
+	}
 
 return(0);
 }
