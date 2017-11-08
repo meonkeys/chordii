@@ -63,6 +63,9 @@
 #define CHORD_BUILTIN	0
 #define CHORD_DEFINED	1
 #define CHORD_IN_CHORDRC	2
+#define DEF_MARGIN 72.0
+#define DEF_MARGIN_TOP 24.0
+#define DEF_MARGIN_BOTTOM 32.0
 
 #define CHORD_EASY	0
 #define CHORD_HARD	1

@@ -101,7 +101,9 @@ float
 	chord_inc,
 	scale = 1.0,		/* Current scale factor */
 	rotation = 0.0,		/* Current rotation */
-	margin,
+	margin, rt_margin, rc_margin,  /* left page margin in points */
+	margin_top, rt_margin_top, rc_margin_top,  /* top page margin in points */
+	margin_bottom, rt_margin_bottom, rc_margin_bottom,  /* bottom page margin in points */
 	top,
 	bottom,
 	height,
@@ -324,16 +326,20 @@ char *command;
 	fprintf (stderr, "Usage: %s [options] file [file ...]\n", command);
 	fprintf (stderr, "Options:\n");
 	fprintf (stderr, "  --about  -A                   About Chordii...\n");
+	fprintf (stderr, "  --chord-colour=COL            Sets chord colour [black]\n");
 	fprintf (stderr, "  --chord-font=FONT  -C         Sets chord font\n");
 	fprintf (stderr, "  --chord-grid-size=N  -s       Sets chord grid size [30]\n");
 	fprintf (stderr, "  --chord-grids-sorted  -S      Prints chord grids alphabetically\n");
 	fprintf (stderr, "  --chord-size=N  -c            Sets chord size [9]\n");
-	fprintf (stderr, "  --chord-colour=COL            Sets chord colour [black]\n");
 	fprintf (stderr, "  --dump-chords  -D             Dumps chords definitions (PostScript)\n");
 	fprintf (stderr, "  --dump-chords-text  -d        Dumps chords definitions (Text)\n");
 	fprintf (stderr, "  --even-pages-number-left  -L  Even pages numbers on left\n");
 	fprintf (stderr, "  --help  -h                    This message\n");
 	fprintf (stderr, "  --lyrics-only  -l             Only prints lyrics\n");
+	fprintf (stderr, "  --margin -m                   Set the page left margin in points [72.0]\n");
+	fprintf (stderr, "  --margin-top -e               Set the page top margin in points [24.0]\n");
+	fprintf (stderr, "  --margin-bottom -b            Set the page bottom margin in points [32.0]\n");
+	fprintf (stderr, "  --nashville -N                Output Nashville Notation (no translation)\n");
 	fprintf (stderr, "  --no-chord-grids  -G          Disables printing of chord grids\n");
 	fprintf (stderr, "  --no-easy-chord-grids  -g     Doesn't print grids for builtin \"easy\" chords.\n");
 	fprintf (stderr, "  --output=FILE  -o             Saves the output to FILE\n");
@@ -341,15 +347,14 @@ char *command;
 	fprintf (stderr, "  --page-size=FMT  -P           Specifies page size [letter, a4 (default)]\n");
 	fprintf (stderr, "  --single-space  -a            Automatic single space lines without chords\n");
 	fprintf (stderr, "  --start-page-number=N  -p     Starting page number [1]\n");
-	fprintf (stderr, "  --text-size=N  -t             Sets text size [12]\n");
 	fprintf (stderr, "  --text-font=FONT  -T          Sets text font\n");
+	fprintf (stderr, "  --text-size=N  -t             Sets text size [12]\n");
 	fprintf (stderr, "  --toc  -i                     Generates a table of contents\n");
 	fprintf (stderr, "  --transpose=N  -x             Transposes by N semi-tones\n");
 	fprintf (stderr, "  --version  -V                 Prints Chordii version and exits\n");
 	fprintf (stderr, "  --vertical-space=N  -w        Extra vertical space between lines\n");
 	fprintf (stderr, "  --2-up  -2                    2 pages per sheet\n");
 	fprintf (stderr, "  --4-up  -4                    4 pages per sheet\n");
-	fprintf (stderr, "  --nashville -N                Output Nashville Notation (no translation)\n");
 	exit(0);
 	}
 
@@ -705,6 +710,9 @@ void set_sys_def()
 	text_font = DEF_TEXT_FONT;
 	chord_font = DEF_CHORD_FONT;
 	text_font = DEF_TEXT_FONT;
+	margin = DEF_MARGIN;
+	margin_top = DEF_MARGIN_TOP;
+	margin_bottom = DEF_MARGIN_BOTTOM;
 	no_grid = FALSE;
 	n_columns = 0;
 	max_columns = 1;
@@ -724,6 +732,9 @@ void set_rc_def()
 	if (rc_chord_col != NULL) chord_col =  rc_chord_col;
 	if (rc_pagespec != NULL) pagespec = rc_pagespec;
 	if (rc_extra_space != 0) extra_space = rc_extra_space;
+	if (rc_margin != 0) margin = rc_margin;
+	if (rc_margin_top != 0) margin_top = rc_margin_top;
+	if (rc_margin_bottom != 0) margin_bottom = rc_margin_bottom;
 	}
 
 /* --------------------------------------------------------------------------------*/
@@ -738,6 +749,9 @@ void set_rt_def()
 	if (rt_chord_col != NULL) chord_col =  rt_chord_col;
 	if (rt_pagespec != NULL) pagespec = rt_pagespec;
 	if (rt_extra_space != 0) extra_space = rt_extra_space;
+	if (rt_margin != 0) margin = rt_margin;
+	if (rt_margin_top != 0) margin_top = rt_margin_top;
+	if (rt_margin_bottom != 0) margin_bottom = rt_margin_bottom;
 	}
 
 /* --------------------------------------------------------------------------------*/
@@ -750,9 +764,8 @@ void init_values()
 	height = pagespec->height;
 	width  = pagespec->width;
 
-	top = height - 36.0;
-	bottom = 40.0;
-	margin = 72.0;
+	top = height - margin_top;
+	bottom = margin_bottom;
 	min_col_vpos = top;		/* lowest colums ending */
 
 	switch (pagination) 
@@ -1351,36 +1364,39 @@ void read_chordrc()
 
 static struct option long_options[] = {
   /* These are long only, put at the beginning */
-  { "chord-color",	      required_argument, 0, 0   },
-  { "chord-colour",	      required_argument, 0, 0   },
+  { "chord-color",            required_argument, 0, 0   },
+  { "chord-colour",	          required_argument, 0, 0   },
   /* These have single-character equivalents */
-  { "2-up",		      no_argument,       0, '2' },
-  { "4-up",		      no_argument,       0, '4' },
-  { "about",		      no_argument,       0, 'A' },
-  { "chord-font",	      required_argument, 0, 'C' },
+  { "2-up",                   no_argument,       0, '2' },
+  { "4-up",                   no_argument,       0, '4' },
+  { "about",                  no_argument,       0, 'A' },
+  { "chord-font",             required_argument, 0, 'C' },
   { "chord-grids-sorted",     no_argument,       0, 'S' },
-  { "chord-grid-size",	      required_argument, 0, 's' },
-  { "chord-size",	      required_argument, 0, 'c' },
-  { "dump-chords",	      no_argument,       0, 'D' },
-  { "dump-chords-text",	      no_argument,       0, 'd' },
+  { "chord-grid-size",        required_argument, 0, 's' },
+  { "chord-size",             required_argument, 0, 'c' },
+  { "dump-chords",            no_argument,       0, 'D' },
+  { "dump-chords-text",       no_argument,       0, 'd' },
   { "even-pages-number-left", no_argument,       0, 'L' },
-  { "help",		      no_argument,       0, 'h' },
-  { "lyrics-only",	      no_argument,       0, 'l' },
-  { "no-chord-grids",	      no_argument,       0, 'G' },
+  { "help",                   no_argument,       0, 'h' },
+  { "lyrics-only",            no_argument,       0, 'l' },
+  { "no-chord-grids",         no_argument,       0, 'G' },
   { "no-easy-chord-grids",    no_argument,       0, 'g' },
-  { "output",		      required_argument, 0, 'o' },
+  { "output",                 required_argument, 0, 'o' },
   { "page-number-logical",    no_argument,       0, 'n' },
-  { "page-size",	      required_argument, 0, 'P' },
-  { "single-space",	      no_argument,       0, 'a' },
+  { "page-size",              required_argument, 0, 'P' },
+  { "single-space",           no_argument,       0, 'a' },
   { "start-page-number",      required_argument, 0, 'p' },
   { "table-of-contents",      no_argument,       0, 'i' },
-  { "text-font",	      required_argument, 0, 'T' },
-  { "text-size",	      required_argument, 0, 't' },
-  { "toc",		      no_argument,       0, 'i' },
-  { "transpose",	      required_argument, 0, 'x' },
-  { "version",		      no_argument,       0, 'V' },
-  { "vertical-space",	      required_argument, 0, 'w' },
+  { "text-font",              required_argument, 0, 'T' },
+  { "text-size",              required_argument, 0, 't' },
+  { "toc",                    no_argument,       0, 'i' },
+  { "transpose",              required_argument, 0, 'x' },
+  { "version",                no_argument,       0, 'V' },
+  { "vertical-space",         required_argument, 0, 'w' },
   { "nashville",              no_argument,       0, 'N' },
+  { "margin",                 no_argument,	     0, 'm' },
+  { "margin-top",             no_argument,       0, 'e' },
+  { "margin-bottom",          no_argument,       0, 'b' },
   /* Do not forget to terminate the list, to prevent crashes */
   /*  on unknown options. */
   { NULL,                     0,                 0, 0   },
@@ -1398,7 +1414,7 @@ char **argv;
 
 	command_name= argv[0];
 	while ((c = getopt_long(argc, argv,
-				"aAc:C:dDgGhilLno:p:P:s:St:T:Vw:x:24N",
+				"aAc:C:dDgGhilLno:p:P:s:St:T:Vw:x:24Nm:e:b:",
 				long_options, &option_index)) != -1)
 		switch (c) {
 
@@ -1544,6 +1560,18 @@ char **argv;
 
 		case 'w':
 			rt_extra_space = atoi(optarg);
+			break;
+
+		case 'm':
+			rt_margin = atof(optarg);
+			break;
+
+		case 'e':
+			rt_margin_top = atof(optarg);
+			break;
+
+		case 'b':
+			rt_margin_bottom = atof(optarg);
 			break;
 
 		case 0:		/* long only option */
