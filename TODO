@@ -31,7 +31,7 @@
 	[_] can we just use Hudson?
 [_] use user-provided title for PostScript document title
 [_] use user-provided preamble for PostScript (font encoding!)
-[_] use user-provided margins for the document
+[X] use user-provided margins for the document
 [_] better way to select which chords are printed
 [_] transpose up different from transpose down
 [_] user defined (language specific) note names, e.g. German, Italian.
