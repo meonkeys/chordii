@@ -716,7 +716,6 @@ void set_sys_def()
 	no_grid = FALSE;
 	n_columns = 0;
 	max_columns = 1;
-	dummy_kcs.chord_name[0]='\0';
 	extra_space = DEF_EXTRA_SPACE;
 	}
 

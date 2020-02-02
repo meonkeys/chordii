@@ -209,7 +209,7 @@ int	origin, difficult;
 		kc_ptr=kc_ptr->next;
 		}
 
-	new_kc_ptr = (struct kcs *) malloc (sizeof dummy_kcs);
+	new_kc_ptr = (struct kcs *) malloc (sizeof (struct kcs));
 	new_kc_ptr->next = kc_ptr;
 	*prev_kc_ptr = new_kc_ptr;
 
@@ -262,7 +262,7 @@ char *chord;
 			kc_ptr=get_kc_entry (chord);
 			}
 
-		new = (struct chord_struct *) malloc (sizeof (dummy_chord_struct));
+		new = (struct chord_struct *) malloc (sizeof (struct chord_struct));
 		new->chord=kc_ptr;
 		new->next = ct_ptr;
 		*prev_ptr_handle = new;
@@ -307,7 +307,7 @@ char *chord;
 			kc_ptr=get_kc_entry (chord);
 			}
 
-		new = (struct chord_struct *) malloc (sizeof (dummy_chord_struct));
+		new = (struct chord_struct *) malloc (sizeof (struct chord_struct));
 		new->chord=kc_ptr;
 		new->next = ct_ptr;
 		*prev_ptr_handle = new;

@@ -77,12 +77,12 @@ struct kcs {
 	int	s1,s2,s3,s4,s5,s6;
 	int	origin;
 	int	difficult;
-	} dummy_kcs;
+	};
 
 struct chord_struct {
 	struct chord_struct *next;
 	struct kcs *chord;
-	} dummy_chord_struct;
+	};
 
 struct sub_title_struct {
 	struct sub_title_struct *next_sub;
