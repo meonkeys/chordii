@@ -1,7 +1,16 @@
 Welcome to Chordii!
 
-Chordii is a fork of Chord, a program very popular several years
+----------------------------------------------------------------------
+
+Wait! You probably don't want this. Check out ChordPro first instead.
+ChordPro is a better, newer program that works with ChordPro formatted
+plain text song files: https://www.chordpro.org
+
+----------------------------------------------------------------------
+
+Chordii was a fork of Chord, a program very popular several years
 ago and most famous for its trendsetting 'ChordPro' music file format.
+Chordii was also temporarily called Chordie.
 
 After multiple failed attempts to contact the original authors, it was
 determined that Chord was unmaintained. Luckily, Chord was licensed
@@ -30,7 +39,7 @@ produce a PostScript document that includes:
 
 And, as they say, more... and even more to come!
 
-Chordii homepage: http://chordii.org/
+Chordii homepage: http://chordii.org/ (defunct)
 Project homepage: http://www.sourceforge.net/projects/chordii/
 
 Extensive documentation can be found in the Chordii User Guide,
